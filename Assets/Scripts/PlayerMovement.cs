@@ -20,9 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput = ReadInput();
 
-        // Alleen updaten als de speler daadwerkelijk beweegt.
-        // Zo blijft hij bij stilstand in de laatste richting kijken,
-        // in plaats van dat de Blend Tree gaat mengen op (0,0).
+
         if (moveInput != Vector2.zero)
         {
             animator.SetFloat("MoveX", moveInput.x);
@@ -48,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
         if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) y -= 1f;
         if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) y += 1f;
 
-        // Normalized, anders loop je diagonaal sneller dan recht vooruit.
         return new Vector2(x, y).normalized;
     }
 }

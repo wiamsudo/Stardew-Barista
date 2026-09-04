@@ -231,11 +231,11 @@ Transform:
   m_GameObject: {fileID: 1435704457}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.45, y: -3.37, z: -5}
+  m_LocalPosition: {x: 0.45, y: -1.52, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1663106223}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1435704461
 Rigidbody2D:
@@ -365,7 +365,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1435704460}
   - {fileID: 2060129567}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -446,10 +445,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.PixelPerfectCamera
   m_ComponentVersion: 1
   m_AssetsPPU: 16
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
+  m_RefResolutionX: 160
+  m_RefResolutionY: 135
   m_CropFrame: 0
-  m_GridSnapping: 1
+  m_GridSnapping: 0
   m_FilterMode: 0
   m_UpscaleRT: 0
   m_PixelSnapping: 0
@@ -491,7 +490,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.6458335
+  orthographic size: 9.734375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -516,7 +515,7 @@ Transform:
   m_GameObject: {fileID: 1826489002}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.17807636, y: -3.3, z: -10}
+  m_LocalPosition: {x: 0.54, y: -3.3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1673,3 +1672,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1826489006}
   - {fileID: 1663106223}
+  - {fileID: 1435704460}
