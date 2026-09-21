@@ -1,51 +1,36 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 3f;
+    public float moveSpeed = 3f;
 
-    private Rigidbody2D rb;
-    private Animator animator;
-    private Vector2 moveInput;
+    Rigidbody2D rb;
+    Animator anim;
+    Vector2 input;
 
-    private void Awake()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+        anim.SetFloat("MoveY", -1);
     }
 
-    private void Update()
+    void Update()
     {
-        moveInput = ReadInput();
+        var k = Keyboard.current;
+        input = ArduinoInput.Move;
 
+        if (input == Vector2.zero && k != null)
+            input = new Vector2(k.dKey.isPressed ? 1 : k.aKey.isPressed ? -1 : 0,
+                                k.wKey.isPressed ? 1 : k.sKey.isPressed ? -1 : 0);
 
-        if (moveInput != Vector2.zero)
-        {
-            animator.SetFloat("MoveX", moveInput.x);
-            animator.SetFloat("MoveY", moveInput.y);
-        }
+        input = input.normalized;
+        if (input == Vector2.zero) return;
+
+        anim.SetFloat("MoveX", input.x);
+        anim.SetFloat("MoveY", input.y);
     }
 
-    private void FixedUpdate()
-    {
-        rb.linearVelocity = moveInput * moveSpeed;
-    }
-
-    private Vector2 ReadInput()
-    {
-        var keyboard = Keyboard.current;
-        if (keyboard == null) return Vector2.zero;
-
-        float x = 0f;
-        float y = 0f;
-
-        if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) x -= 1f;
-        if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) x += 1f;
-        if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) y -= 1f;
-        if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) y += 1f;
-
-        return new Vector2(x, y).normalized;
-    }
+    void FixedUpdate() => rb.linearVelocity = input * moveSpeed;
 }
