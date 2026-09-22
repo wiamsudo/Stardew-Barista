@@ -18,19 +18,36 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        var k = Keyboard.current;
         input = ArduinoInput.Move;
 
-        if (input == Vector2.zero && k != null)
-            input = new Vector2(k.dKey.isPressed ? 1 : k.aKey.isPressed ? -1 : 0,
-                                k.wKey.isPressed ? 1 : k.sKey.isPressed ? -1 : 0);
+        if (input == Vector2.zero)
+            input = KeyboardInput();
 
         input = input.normalized;
-        if (input == Vector2.zero) return;
 
-        anim.SetFloat("MoveX", input.x);
-        anim.SetFloat("MoveY", input.y);
+        if (input != Vector2.zero)
+        {
+            anim.SetFloat("MoveX", input.x);
+            anim.SetFloat("MoveY", input.y);
+        }
     }
 
-    void FixedUpdate() => rb.linearVelocity = input * moveSpeed;
+    void FixedUpdate()
+    {
+        rb.linearVelocity = input * moveSpeed;
+    }
+
+    Vector2 KeyboardInput()
+    {
+        Key[] keys = { Key.W, Key.S, Key.A, Key.D };
+        Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+
+        Vector2 direction = Vector2.zero;
+
+        for (int i = 0; i < keys.Length; i++)
+            if (Keyboard.current[keys[i]].isPressed)
+                direction += directions[i];
+
+        return direction;
+    }
 }
