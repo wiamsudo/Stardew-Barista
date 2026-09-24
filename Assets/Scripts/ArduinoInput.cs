@@ -47,4 +47,10 @@ public class ArduinoInput : MonoBehaviour
         }
         catch { }
     }
+
+    void OnDestroy()
+    {
+        if (port != null && port.IsOpen)
+            port.Close();
+    }
 }

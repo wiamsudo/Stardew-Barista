@@ -13,6 +13,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(name + " Slots: " + slots.Length + ", Icons: " + icons.Length);
         UpdateSlots();
     }
 
@@ -36,6 +37,13 @@ public class Inventory : MonoBehaviour
         int newSlot = items.Count - 1;
         icons[newSlot].transform.localScale = Vector3.one * 1.5f;
         UpdateSlots();
+    }
+
+    public bool Remove(Item item)
+    {
+        bool removed = items.Remove(item);
+        UpdateSlots();
+        return removed;
     }
 
     void SelectNext()
